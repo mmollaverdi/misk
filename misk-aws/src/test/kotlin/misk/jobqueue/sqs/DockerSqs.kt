@@ -71,6 +71,14 @@ internal object DockerSqs : ExternalDependency {
       return "127.0.0.1"
   }
 
+  private fun getStuff() = {
+    println ("CAMERON CAMERON http://${getTargetHost()}:$clientPort")
+  AwsClientBuilder.EndpointConfiguration(
+    "http://${getTargetHost()}:$clientPort",
+    "us-east-1"
+  )
+  }
+
   val endpoint = AwsClientBuilder.EndpointConfiguration(
     "http://${getTargetHost()}:$clientPort",
     "us-east-1"
