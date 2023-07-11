@@ -9,6 +9,7 @@ gradleEnterprise {
   }
 }
 
+include(":detekt-rules")
 include(":misk")
 include(":misk-action-scopes")
 include(":misk-actions")

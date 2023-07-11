@@ -74,6 +74,7 @@ class DefaultCluster(
   }
 
   /** Triggers a change to the cluster in response members becoming ready or not ready */
+  @JvmOverloads
   fun clusterChanged(
     membersBecomingReady: Set<Cluster.Member> = setOf(),
     membersBecomingNotReady: Set<Cluster.Member> = setOf()

@@ -1,5 +1,7 @@
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
@@ -14,6 +16,7 @@ buildscript {
   dependencies {
     classpath(Dependencies.kotlinAllOpenPlugin)
     classpath(Dependencies.kotlinGradlePlugin)
+    classpath(Dependencies.detektGradlePlugin)
     classpath(Dependencies.dokkaGradlePlugin)
     classpath(Dependencies.kotlinNoArgPlugin)
     classpath(Dependencies.junitGradlePlugin)
@@ -73,7 +76,7 @@ dependencyAnalysis {
 }
 
 apiValidation {
-  ignoredProjects.addAll(listOf("exemplar", "exemplarchat"))
+  ignoredProjects.addAll(listOf("exemplar", "exemplarchat", "detekt-rules"))
   additionalSourceSets.addAll(listOf("testFixtures"))
 }
 
@@ -91,6 +94,24 @@ val testShardHibernate by tasks.creating {
 
 subprojects {
   apply(plugin = "org.jetbrains.dokka")
+  apply(plugin = "io.gitlab.arturbosch.detekt")
+
+  if (name != "detekt-rules") {
+    extensions.configure(DetektExtension::class) {
+      parallel = true
+      buildUponDefaultConfig = false
+      ignoreFailures = false
+      config.setFrom(files("$rootDir/detekt.yaml"))
+    }
+  } else {
+    extensions.configure(DetektExtension::class) {
+      ignoreFailures = true
+    }
+  }
+
+  dependencies {
+    add("detektPlugins", project(":detekt-rules"))
+  }
 
   buildscript {
     repositories {
@@ -160,6 +181,11 @@ subprojects {
     }
   }
 
+  tasks.withType<Detekt> {
+    dependsOn(":detekt-rules:compileKotlin")
+    jvmTarget = "11"
+  }
+
   plugins.withType<BasePlugin> {
     tasks.findByName("check")!!.apply {
       if (listOf(
@@ -175,6 +201,11 @@ subprojects {
         testShardHibernate.dependsOn(this)
       } else {
         testShardNonHibernate.dependsOn(this)
+      }
+
+      dependsOn(dependsOn.filterNot { name != "detekt" })
+      if (project.name != "detekt-rules" && project.name != "misk-bom") {
+        dependsOn("detektMain")
       }
     }
   }

@@ -1,0 +1,16 @@
+# See https://github.com/detekt/detekt/blob/master/detekt-core/src/main/resources/default-detekt-config.yml
+# for default settings.
+
+output-reports:
+  active: true
+  exclude:
+    - 'DetektProgressListener'
+
+complexity:
+  LongParameterList:
+    active: false
+
+detective:
+  active: true
+  AnnotatePublicApisWithJvmOverloads:
+    active: true
