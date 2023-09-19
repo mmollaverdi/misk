@@ -15,6 +15,7 @@ dependencies {
   api(libs.okHttp)
   api(libs.retrofit)
   api(project(":misk"))
+  api(project(":misk-api"))
   api(project(":misk-config"))
   api(project(":misk-inject"))
   implementation(libs.kotlinLogging)

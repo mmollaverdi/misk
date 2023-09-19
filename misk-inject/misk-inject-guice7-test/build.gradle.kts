@@ -17,7 +17,7 @@ dependencies {
   testImplementation(libs.okHttp)
   testImplementation(project(":misk"))
   testImplementation(project(":misk-actions"))
-  testImplementation(project(":misk-core"))
+  testImplementation(project(":misk-api"))
   testImplementation(project(":misk-inject"))
   testImplementation(project(":misk-testing"))
 }

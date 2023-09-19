@@ -9,11 +9,11 @@ plugins {
 }
 
 dependencies {
+
   api(libs.guava)
   api(libs.jakartaInject)
   api(libs.kotlinLogging)
   api(libs.kotlinRetry)
-  api(libs.okHttp)
   api(libs.slf4jApi)
   api(project(":wisp:wisp-config"))
   api(project(":wisp:wisp-ssl"))
@@ -30,8 +30,10 @@ dependencies {
   testImplementation(libs.kotlinTest)
   testImplementation(libs.kotlinxCoroutines)
   testImplementation(libs.logbackClassic)
+  testImplementation(libs.okHttp)
   testImplementation(project(":wisp:wisp-logging"))
   testImplementation(project(":wisp:wisp-logging-testing"))
+  testImplementation(project(":misk-api"))
   testImplementation(project(":misk-core"))
   testImplementation(project(":misk-testing"))
 }

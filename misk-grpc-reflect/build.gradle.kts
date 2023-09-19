@@ -28,6 +28,7 @@ dependencies {
   api(libs.jakartaInject)
   api(libs.wireReflector)
   api(project(":misk-actions"))
+  api(project(":misk-api"))
   api(project(":misk-inject"))
   implementation(libs.kotlinLogging)
   implementation(libs.kotlinReflect)
