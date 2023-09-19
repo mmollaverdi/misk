@@ -9,7 +9,6 @@ plugins {
 }
 
 dependencies {
-  api(libs.okHttp)
   api(libs.wireGrpcClient) // GrpcStatus
   api(libs.wireRuntime) // AnyMessage
   api(project(":misk-api"))
@@ -17,8 +16,6 @@ dependencies {
   implementation(libs.guava)
   implementation(libs.guice)
   implementation(libs.kotlinStdLibJdk8)
-  implementation(libs.okio)
-
   testImplementation(libs.junitApi)
   testImplementation(libs.kotlinTest)
 }
