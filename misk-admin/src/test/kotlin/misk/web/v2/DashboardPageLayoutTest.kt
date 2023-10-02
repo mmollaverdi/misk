@@ -2,7 +2,6 @@ package misk.web.v2
 
 import com.google.inject.Provider
 import jakarta.inject.Inject
-import misk.inject.toKey
 import misk.scope.ActionScope
 import misk.testing.MiskTest
 import misk.testing.MiskTestModule
@@ -11,6 +10,7 @@ import misk.web.HttpCall
 import misk.web.metadata.MetadataTestingModule
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import org.junit.jupiter.api.Test
+import kotlin.reflect.full.createType
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
@@ -26,7 +26,7 @@ class DashboardPageLayoutTest {
 
   @Test
   fun `happy path`() {
-    actionScope.enter(mapOf(HttpCall::class.toKey() to fakeHttpCall)).use {
+    actionScope.enter(mapOf(HttpCall::class.createType() to fakeHttpCall)).use {
       // No exception thrown on correct usage
       layout.get().newBuilder().build()
     }
@@ -34,7 +34,7 @@ class DashboardPageLayoutTest {
 
   @Test
   fun `no builder reuse permitted`() {
-    actionScope.enter(mapOf(HttpCall::class.toKey() to fakeHttpCall)).use {
+    actionScope.enter(mapOf(HttpCall::class.createType() to fakeHttpCall)).use {
       // Fresh builder must have newBuilder() called
       val e1 = assertFailsWith<IllegalStateException> { layout.get().build() }
       assertEquals(
