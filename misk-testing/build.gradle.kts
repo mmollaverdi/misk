@@ -14,13 +14,11 @@ dependencies {
   api(libs.guava)
   api(libs.guice)
   api(libs.jakartaInject)
-  api(libs.jettyServletApi)
   api(libs.junitApi)
   api(libs.kotlinLogging)
   api(libs.moshi)
   api(libs.okHttp)
   api(libs.openTracingMock)
-  api(libs.servletApi)
   api(project(":wisp:wisp-time-testing"))
   api(project(":misk"))
   api(project(":misk-api"))
@@ -40,7 +38,6 @@ dependencies {
   implementation(project(":misk-action-scopes"))
   implementation(project(":misk-config"))
   implementation(project(":misk-service"))
-
   testImplementation(libs.kotlinTest)
   testImplementation(project(":misk-actions"))
 }
