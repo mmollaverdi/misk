@@ -18,6 +18,7 @@ dependencies {
   api(project(":wisp:wisp-config"))
   api(project(":wisp:wisp-ssl"))
   api(project(":wisp:wisp-token"))
+  api(project(":misk-api"))
   api(project(":misk-config"))
   api(project(":misk-inject"))
   implementation(libs.guice)
