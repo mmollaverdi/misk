@@ -1,5 +1,11 @@
 package misk.inject
 
+import com.google.inject.multibindings.Multibinder
+import io.mockk.mockk
+import misk.mockito.MockitoTestFixture
+import misk.mockk.MockkTestFixture
+import misk.testing.TestFixture
+import org.mockito.Mockito
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
@@ -44,5 +50,16 @@ abstract class ReusableTestModule: KAbstractModule() {
       result = 31 * result + ((property as KProperty1<ReusableTestModule, *>).get(this)?.hashCode() ?: 0)
     }
     return result
+  }
+
+  fun <T: Any> bindMockk(clazz: Class<T>, mockedInstance: T, setUp: T.() -> Unit = {}) {
+    binder().bind(clazz).toInstance(mockedInstance)
+    multibind<TestFixture>().toInstance(MockkTestFixture(mockedInstance, setUp))
+  }
+
+  fun <T: Any> bindMockitoMock(clazz: Class<T>) {
+    val mockedInstance = Mockito.mock(clazz)
+    binder().bind(clazz).toInstance(mockedInstance)
+    multibind<TestFixture>().toInstance(MockitoTestFixture { mockedInstance })
   }
 }

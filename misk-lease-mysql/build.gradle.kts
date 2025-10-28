@@ -33,7 +33,7 @@ dependencies {
   testRuntimeOnly(libs.junitEngine)
 
   testFixturesImplementation(project(":misk-api"))
-  testFixturesImplementation(project(":misk-inject"))
+  testFixturesImplementation(project(":misk-testing"))
   testFixturesImplementation(testFixtures(project(":misk-jdbc")))
 
 }

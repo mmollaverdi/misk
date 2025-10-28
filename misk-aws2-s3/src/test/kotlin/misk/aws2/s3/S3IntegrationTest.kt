@@ -4,21 +4,18 @@ import jakarta.inject.Inject
 import misk.MiskTestingServiceModule
 import misk.cloud.aws.AwsEnvironmentModule
 import misk.cloud.aws.FakeAwsEnvironmentModule
-import misk.inject.KAbstractModule
 import misk.inject.ReusableTestModule
 import misk.testing.MiskExternalDependency
 import misk.testing.MiskTest
 import misk.testing.MiskTestModule
 import misk.testing.MockTracingBackendModule
 import org.junit.jupiter.api.Test
-import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider
 import software.amazon.awssdk.core.sync.RequestBody
 import software.amazon.awssdk.services.s3.S3AsyncClient
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.GetObjectRequest
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import software.amazon.awssdk.core.async.AsyncResponseTransformer
 import software.amazon.awssdk.core.async.AsyncRequestBody
 

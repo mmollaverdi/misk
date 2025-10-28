@@ -9,3 +9,9 @@ class MockitoTestFixture(private val mockProvider: Provider<out Any>) : TestFixt
     Mockito.reset(mockProvider.get())
   }
 }
+
+// inline fun <reified T : Any> ReusableTestModule.bindMock() {
+//   val mock = mock<T>()
+//   bind<BarbClient>().toInstance(mock)
+//   multibind<TestFixture>().toInstance(MockitoTestFixture { mock })
+// }

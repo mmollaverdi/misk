@@ -7,7 +7,6 @@ import misk.annotation.ExperimentalMiskApi
 import misk.aws2.sqs.jobqueue.config.SqsConfig
 import misk.cloud.aws.AwsEnvironmentModule
 import misk.cloud.aws.FakeAwsEnvironmentModule
-import misk.inject.KAbstractModule
 import misk.inject.ReusableTestModule
 import misk.jobqueue.QueueName
 import misk.testing.MockTracingBackendModule
