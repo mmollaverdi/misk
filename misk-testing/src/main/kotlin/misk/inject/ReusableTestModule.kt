@@ -6,6 +6,7 @@ import misk.mockito.MockitoTestFixture
 import misk.mockk.MockkTestFixture
 import misk.testing.TestFixture
 import org.mockito.Mockito
+import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
@@ -52,8 +53,8 @@ abstract class ReusableTestModule: KAbstractModule() {
     return result
   }
 
-  fun <T: Any> bindMockk(clazz: Class<T>, mockedInstance: T, setUp: T.() -> Unit = {}) {
-    binder().bind(clazz).toInstance(mockedInstance)
+  fun <T: Any> bindMockk(clazz: KClass<T>, mockedInstance: T, setUp: T.() -> Unit = {}) {
+    binder().bind(clazz.java).toInstance(mockedInstance)
     multibind<TestFixture>().toInstance(MockkTestFixture(mockedInstance, setUp))
   }
 
